@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Pembiayaan Kontraktor Jakarta</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f9fc;--white:#fff;
+  --border:#e5e7eb;--border-light:#f3f4f6;
+  --primary:#7c3aed;--pl:#ede9fe;--ps:rgba(124,58,237,0.06);--pd:#6d28d9;
+  --success:#10b981;--sl:#ecfdf5;--ss:rgba(16,185,129,0.08);
+  --danger:#ef4444;--dl:#fef2f2;
+  --warning:#f59e0b;--wl:#fffbeb;
+  --info:#3b82f6;--il:#eff6ff;
+  --t1:#111827;--t2:#374151;--t3:#6b7280;--t4:#9ca3af;
+  --sh:0 1px 3px rgba(0,0,0,0.05);--shm:0 4px 12px rgba(0,0,0,0.06);
+  --r:14px;--rs:10px;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t1);min-height:100vh}
+
+/* NAV */
+.nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:100;box-shadow:var(--sh)}
+.nav-in{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-brand{display:flex;align-items:center;gap:.5rem}
+.nav-logo{width:34px;height:34px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.9rem}
+.nav-t{font-weight:700;font-size:.95rem}.nav-t span{color:var(--primary)}
+.tabs{display:flex;gap:0;height:100%}
+.tab{padding:0 1rem;height:100%;display:flex;align-items:center;font-size:.8rem;font-weight:500;color:var(--t3);cursor:pointer;border-bottom:2.5px solid transparent;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--primary);background:var(--ps)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary);font-weight:600}
+@media(max-width:1000px){.tabs{overflow-x:auto}.tab{padding:0 .7rem;font-size:.75rem}}
+
+/* LAYOUT */
+.ct{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.pg{display:none}.pg.on{display:block}
+.ph{margin-bottom:2rem}
+.ph h2{font-size:1.5rem;font-weight:800;letter-spacing:-0.02em}
+.ph p{color:var(--t3);font-size:.875rem;margin-top:.3rem}
+
+/* CARD */
+.cd{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;box-shadow:var(--sh);margin-bottom:1.25rem}
+.ct-t{font-size:.95rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.ci{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+
+/* COMPARISON */
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:2rem;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh)}
+@media(max-width:700px){.cmp-grid{grid-template-columns:1fr}}
+.cmp-col{background:var(--white)}
+.cmp-head{padding:1.25rem 1.5rem;text-align:center;color:#fff}
+.cmp-head.plafon{background:linear-gradient(135deg,#7c3aed,#6d28d9)}
+.cmp-head.trans{background:linear-gradient(135deg,#10b981,#059669)}
+.cmp-head h3{font-size:1.05rem;font-weight:800;margin-bottom:.15rem}
+.cmp-head .sub{font-size:.72rem;opacity:.8;font-weight:400}
+.cmp-row{padding:1rem 1.5rem;border-bottom:1px solid var(--border-light);min-height:90px;display:flex;flex-direction:column;justify-content:center}
+.cmp-row:last-child{border-bottom:none}
+.cmp-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem;display:flex;align-items:center;gap:.35rem}
+.cmp-label.l1{color:var(--primary)}.cmp-label.l2{color:var(--success)}
+.cmp-text{font-size:.82rem;color:var(--t2);line-height:1.55}
+.cmp-text strong{color:var(--t1)}
+.cmp-row:hover{background:var(--bg)}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.cmp-row{animation:slideUp .4s ease both}
+.cmp-col:nth-child(1) .cmp-row:nth-child(2){animation-delay:.05s}
+.cmp-col:nth-child(1) .cmp-row:nth-child(3){animation-delay:.1s}
+.cmp-col:nth-child(1) .cmp-row:nth-child(4){animation-delay:.15s}
+.cmp-col:nth-child(1) .cmp-row:nth-child(5){animation-delay:.2s}
+.cmp-col:nth-child(2) .cmp-row:nth-child(2){animation-delay:.05s}
+.cmp-col:nth-child(2) .cmp-row:nth-child(3){animation-delay:.1s}
+.cmp-col:nth-child(2) .cmp-row:nth-child(4){animation-delay:.15s}
+.cmp-col:nth-child(2) .cmp-row:nth-child(5){animation-delay:.2s}
+
+/* DIMENSION LABELS */
+.dim-strip{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:0;border-radius:0}
+.dim-label{text-align:center;padding:.5rem;font-size:.7rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;background:var(--bg);border-bottom:1px solid var(--border)}
+
+/* SVG CHART */
+.sim-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;box-shadow:var(--sh);margin-bottom:1.5rem}
+.sim-row{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.sim-input{width:110px;padding:.5rem .7rem;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.9rem;font-weight:600;color:var(--pd);background:var(--pl);outline:none;text-align:center}
+.sim-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--ps)}
+.svg-chart{width:100%;overflow:visible}
+.svg-chart text{font-family:'Inter',system-ui,sans-serif}
+
+/* CHECKLIST */
+.checklist{columns:2;column-gap:1.5rem}
+@media(max-width:700px){.checklist{columns:1}}
+.check-item{display:flex;align-items:flex-start;gap:.5rem;margin-bottom:.6rem;break-inside:avoid;font-size:.85rem;color:var(--t2);line-height:1.5}
+.check-dot{width:20px;height:20px;border-radius:50%;background:var(--pl);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* CALC */
+.calc-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:2rem;box-shadow:var(--sh)}
+.calc-top{display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.calc-input-big{padding:.7rem 1rem;border:2px solid var(--border);border-radius:var(--rs);font-family:inherit;font-size:1.1rem;font-weight:700;color:var(--t1);width:220px;outline:none;background:var(--bg)}
+.calc-input-big:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--ps)}
+.toggle-wrap{display:flex;border-radius:var(--rs);overflow:hidden;border:2px solid var(--border)}
+.toggle-btn{padding:.6rem 1.2rem;font-family:inherit;font-size:.85rem;font-weight:600;border:none;cursor:pointer;transition:all .2s;background:var(--white);color:var(--t3)}
+.toggle-btn.on{background:var(--primary);color:#fff}
+.calc-flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem;margin-bottom:1.5rem}
+.flow-item{background:var(--bg);border-radius:var(--rs);padding:.85rem;text-align:center;border:1px solid var(--border-light)}
+.flow-item.hl{background:var(--pl);border-color:rgba(124,58,237,0.15)}
+.flow-item.hlg{background:var(--sl);border-color:rgba(16,185,129,0.15)}
+.flow-label{font-size:.65rem;color:var(--t3);font-weight:600;text-transform:uppercase;letter-spacing:.03em;margin-bottom:.2rem}
+.flow-val{font-size:.9rem;font-weight:700;color:var(--t1)}
+.flow-item.hl .flow-val{color:var(--pd)}
+.flow-item.hlg .flow-val{color:var(--success)}
+.calc-big-result{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:600px){.calc-big-result{grid-template-columns:1fr}}
+.big-res{border-radius:var(--r);padding:1.5rem;text-align:center}
+.big-res.active{border:2px solid var(--primary);background:var(--pl)}
+.big-res.inactive{border:1px solid var(--border);background:var(--bg);opacity:.5}
+.big-res h4{font-size:.8rem;font-weight:600;margin-bottom:.4rem}
+.big-res .bv{font-size:1.4rem;font-weight:800}
+.big-res .bd{font-size:.72rem;color:var(--t3);margin-top:.3rem;line-height:1.4}
+
+/* SIDE BY SIDE REQUIREMENTS */
+.req-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:768px){.req-cols{grid-template-columns:1fr}}
+.req-col h3{font-size:.9rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.exp{margin-bottom:.5rem;border:1px solid var(--border);border-radius:var(--rs);overflow:hidden;transition:box-shadow .2s}
+.exp:hover{box-shadow:var(--shm)}
+.exp-h{display:flex;align-items:center;gap:.6rem;padding:.75rem 1rem;cursor:pointer;user-select:none;transition:background .15s;font-size:.85rem;font-weight:600;color:var(--t1)}
+.exp-h:hover{background:var(--bg)}
+.exp-n{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0}
+.exp-arrow{margin-left:auto;color:var(--t4);font-size:.65rem;transition:transform .3s}
+.exp.open .exp-arrow{transform:rotate(180deg)}
+.exp-b{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:.82rem;color:var(--t2);line-height:1.6}
+.exp.open .exp-b{max-height:500px;padding:.75rem 1rem .75rem 3rem;border-top:1px solid var(--border-light)}
+
+/* FAQ */
+.faq-item{background:var(--white);border:1px solid var(--border);border-radius:var(--r);margin-bottom:.75rem;overflow:hidden;transition:box-shadow .2s}
+.faq-item:hover{box-shadow:var(--shm)}
+.faq-q{padding:1.1rem 1.25rem;cursor:pointer;display:flex;align-items:center;gap:.75rem;font-weight:600;font-size:.9rem;user-select:none;transition:background .15s}
+.faq-q:hover{background:var(--bg)}
+.faq-q .icon{width:28px;height:28px;border-radius:8px;background:var(--pl);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0}
+.faq-arrow{margin-left:auto;color:var(--t4);transition:transform .3s;font-size:.7rem}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-item.open .faq-a{max-height:1200px;padding:0 1.25rem 1.25rem 3.75rem;border-top:1px solid var(--border-light)}
+.faq-a p{font-size:.85rem;color:var(--t2);line-height:1.65;margin-bottom:.75rem}
+.faq-a p:last-child{margin-bottom:0}
+
+/* TABLE mini */
+.tbl-wrap{overflow-x:auto;border-radius:var(--rs);border:1px solid var(--border);margin:.75rem 0}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+thead{background:var(--primary);color:#fff}
+thead th{padding:.6rem .8rem;text-align:left;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em}
+tbody td{padding:.55rem .8rem;border-bottom:1px solid var(--border-light);color:var(--t2);vertical-align:top;line-height:1.5}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--ps)}
+
+/* INFO BOX */
+.ib{border-radius:var(--rs);padding:1rem 1.15rem;font-size:.82rem;color:var(--t2);line-height:1.6;margin-top:1rem}
+.ib h4{font-size:.82rem;font-weight:700;margin-bottom:.4rem;display:flex;align-items:center;gap:.35rem}
+.ib p{margin-bottom:.5rem}.ib p:last-child{margin-bottom:0}
+.ib-b{background:var(--il);border:1px solid rgba(59,130,246,0.12)}
+.ib-w{background:var(--wl);border:1px solid rgba(245,158,11,0.15)}
+.ib-g{background:var(--sl);border:1px solid rgba(16,185,129,0.12)}
+
+/* BADGES */
+.badge{display:inline-block;padding:.15rem .5rem;border-radius:5px;font-size:.68rem;font-weight:600}
+.bp{background:var(--pl);color:var(--pd)}.bg{background:var(--sl);color:#059669}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <div class="nav-brand"><div class="nav-logo">PK</div><div class="nav-t">Pembiayaan <span>Kontraktor Jakarta</span></div></div>
+  <div class="tabs" id="tabs"></div>
+</div></nav>
+<div class="ct">
+
+<!-- ===== PAGE 0: FITUR PRODUK ===== -->
+<div class="pg on" id="p0">
+<div class="ph"><h2>Fitur Produk PKJ</h2><p>Perbandingan dua jenis pembiayaan — pilih yang sesuai kebutuhan proyek Anda</p></div>
+
+<!-- COMPARISON: PKJ Plafon vs Transaksional -->
+<div class="cmp-grid">
+  <div class="cmp-col">
+    <div class="cmp-head plafon"><h3>🔄 PKJ Plafon</h3><div class="sub">Revolving — Multi Proyek</div></div>
+    <div class="cmp-row"><div class="cmp-label l1">📋 Skema Pembiayaan</div><div class="cmp-text">Fasilitas <strong>revolving</strong> (bisa ditarik berulang). Jangka waktu maks <strong>12 bulan</strong>, dapat diperpanjang per tahun sesuai kinerja. Cocok untuk kontraktor dengan <strong>banyak proyek bersamaan</strong>.</div></div>
+    <div class="cmp-row"><div class="cmp-label l1">💳 Pembayaran Pokok</div><div class="cmp-text">Dibayar <strong>setiap menerima tagihan proyek</strong> (payment) dari <em>bouwheer</em>. Langsung di-execute. Outstanding harus ter-<em>cover</em> sisa tagihan + potensi tagihan <strong>min. 125%</strong>.</div></div>
+    <div class="cmp-row"><div class="cmp-label l1">💰 Pencairan</div><div class="cmp-text">Bisa <strong>ditarik berulang kali</strong> selama limit belum habis. Setiap penarikan harus ada underlying document (kontrak proyek). Penarikan bisa untuk <strong>proyek berbeda-beda</strong>.</div></div>
+    <div class="cmp-row"><div class="cmp-label l1">✅ Pelunasan</div><div class="cmp-text">Pokok lunas dari pembayaran tagihan proyek masing-masing. Bagian yang <strong>belum ditarik tidak dikenakan margin</strong>. Fasilitas tetap aktif sampai jatuh tempo.</div></div>
+  </div>
+  <div class="cmp-col" style="border-left:1px solid var(--border)">
+    <div class="cmp-head trans"><h3>📌 PKJ Transaksional</h3><div class="sub">Non-Revolving — Proyek Spesifik</div></div>
+    <div class="cmp-row"><div class="cmp-label l2">📋 Skema Pembiayaan</div><div class="cmp-text">Fasilitas <strong>non-revolving</strong> (sekali pakai). Jangka waktu = <strong>jangka proyek + 2 bulan</strong> penagihan. Cocok untuk membiayai <strong>satu proyek spesifik</strong>.</div></div>
+    <div class="cmp-row"><div class="cmp-label l2">💳 Pembayaran Pokok</div><div class="cmp-text">Dibayar <strong>setiap penerimaan tagihan</strong> via rekening escrow. Nasabah membukukan saldo tagihan sesuai ketentuan. Outstanding harus ter-<em>cover</em> <strong>min. 125%</strong>.</div></div>
+    <div class="cmp-row"><div class="cmp-label l2">💰 Pencairan</div><div class="cmp-text">Ditarik <strong>sesuai kebutuhan proyek</strong> yang dibiayai. Bisa bertahap (termin, maks <strong>80%</strong> COP Netto) atau sekaligus (turnkey, maks <strong>70%</strong> COP Netto). Selesai ditarik = fasilitas habis.</div></div>
+    <div class="cmp-row"><div class="cmp-label l2">✅ Pelunasan</div><div class="cmp-text">Pokok lunas saat proyek selesai & seluruh tagihan terbayar. Pembiayaan <strong>harus nihil</strong> saat proyek rampung. Pelunasan dipercepat dimungkinkan sesuai ketentuan.</div></div>
+  </div>
+</div>
+
+<!-- SIMULASI MARGIN SVG CHART -->
+<div class="sim-wrap">
+  <div class="ct-t"><div class="ci" style="background:var(--pl);color:var(--primary)">📈</div>Simulasi Margin & Total Pengembalian (Plafon Rp 1 Miliar / 12 Bulan)</div>
+  <div class="sim-row">
+    <span style="font-size:.85rem;font-weight:600;color:var(--t2)">Base Lending Rate (BLR):</span>
+    <input type="number" class="sim-input" id="blrInput" value="9.00" step="0.25" oninput="updateSim()"/>
+    <span style="font-size:.82rem;color:var(--t3)">% per tahun</span>
+  </div>
+  <div id="svgChartWrap" style="width:100%;overflow-x:auto"></div>
+  <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:.75rem;font-size:.78rem;color:var(--t3)">
+    <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--primary);vertical-align:middle;margin-right:.3rem"></span>Pokok Pinjaman</span>
+    <span><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--danger);vertical-align:middle;margin-right:.3rem;opacity:.7"></span>Margin (Bunga)</span>
+  </div>
+  <div id="simInsight" style="margin-top:1rem"></div>
+</div>
+</div>
+
+<!-- ===== PAGE 1: DATA DIBUTUHKAN ===== -->
+<div class="pg" id="p1">
+<div class="ph"><h2>Data yang Dibutuhkan</h2><p>Kelengkapan dokumen pengajuan Pembiayaan Kontraktor Jakarta</p></div>
+<div class="cd">
+  <div class="ct-t"><div class="ci" style="background:var(--pl);color:var(--primary)">📋</div>Checklist Dokumen Permohonan</div>
+  <div class="checklist">
+    <div class="check-item"><div class="check-dot">✓</div>Surat permohonan fasilitas pembiayaan</div>
+    <div class="check-item"><div class="check-dot">✓</div>Fotokopi KTP pengurus & pemegang saham</div>
+    <div class="check-item"><div class="check-dot">✓</div>Fotokopi NPWP perusahaan & pengurus</div>
+    <div class="check-item"><div class="check-dot">✓</div>Akta Pendirian & Akta Perubahan terakhir</div>
+    <div class="check-item"><div class="check-dot">✓</div>NIB berbasis risiko & izin usaha (SIUP, SIUJK, dll)</div>
+    <div class="check-item"><div class="check-dot">✓</div>Surat Keterangan Domisili & AMDAL</div>
+    <div class="check-item"><div class="check-dot">✓</div>CV pengurus & pemegang saham</div>
+    <div class="check-item"><div class="check-dot">✓</div>Surat persetujuan komisaris/pemilik saham</div>
+    <div class="check-item"><div class="check-dot">✓</div>Laporan keuangan (audited/unaudited sesuai ketentuan)</div>
+    <div class="check-item"><div class="check-dot">✓</div>Pengalaman proyek minimal 2 tahun terakhir</div>
+    <div class="check-item"><div class="check-dot">✓</div><strong>Daftar Proyeksi Usaha</strong> (proyek yang sudah/akan dimenangkan)</div>
+    <div class="check-item"><div class="check-dot">✓</div><strong>Daftar Supplier</strong> minimal 1 tahun (nama, alamat, telp)</div>
+    <div class="check-item"><div class="check-dot">✓</div><strong>Daftar Client/Pelanggan</strong> minimal 1 tahun (nama, alamat, telp)</div>
+    <div class="check-item"><div class="check-dot">✓</div>Pas foto pengurus & pemegang saham</div>
+  </div>
+</div>
+<div class="cd">
+  <div class="ct-t"><div class="ci" style="background:var(--sl);color:var(--success)">📊</div>Ketentuan Laporan Keuangan</div>
+  <div class="tbl-wrap"><table><thead><tr><th>Kondisi</th><th>Laporan yang Diperlukan</th></tr></thead><tbody>
+    <tr><td style="font-weight:600">Berdiri &gt; 2 thn <span class="badge bp">Plafon</span></td><td>2 tahun terakhir, menunjukkan keuntungan</td></tr>
+    <tr><td style="font-weight:600">Berdiri &gt; 2 thn <span class="badge bg">Trans.</span></td><td>1 tahun terakhir, untung atau rugi maks 50% dari laba ditahan</td></tr>
+    <tr><td style="font-weight:600">Berdiri 1-2 thn <span class="badge bg">Trans.</span></td><td>Tahun berjalan (triwulan/bulan terakhir) atau tahun terakhir menunjukkan keuntungan</td></tr>
+    <tr><td style="font-weight:600">Berdiri &lt; 1 thn <span class="badge bp">Khusus</span></td><td>Modal disetor ≥ total kewajiban seluruh pengurus & pemilik</td></tr>
+  </tbody></table></div>
+  <div class="ib ib-b"><h4>ℹ️ Catatan</h4><p>Plafon &gt; Rp 10 Miliar wajib <em>audited</em> (opini WTP/WDP). Aktivitas usaha & rekening minimal 6 bulan terakhir di Bank DKI.</p></div>
+</div>
+</div>
+
+<!-- ===== PAGE 2: KALKULATOR ===== -->
+<div class="pg" id="p2">
+<div class="ph"><h2>Kalkulator Pembiayaan</h2><p>Masukkan nilai kontrak dan sesuaikan variabel untuk melihat porsi pembiayaan Bank</p></div>
+<div class="calc-card">
+  <div class="calc-top">
+    <div>
+      <label style="font-size:.72rem;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.03em;display:block;margin-bottom:.3rem">Nilai Kontrak (Ribuan Rp)</label>
+      <input class="calc-input-big" type="number" id="ck" value="10000000" oninput="rc()" placeholder="10.000.000"/>
+    </div>
+    <div>
+      <label style="font-size:.72rem;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.03em;display:block;margin-bottom:.3rem">Skema Pembayaran</label>
+      <div class="toggle-wrap">
+        <button class="toggle-btn on" id="tgT" onclick="setMode('termin')">Termin (80%)</button>
+        <button class="toggle-btn" id="tgK" onclick="setMode('turnkey')">Turnkey (70%)</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.75rem;margin-bottom:1.5rem;padding:1rem;background:var(--bg);border-radius:var(--rs);border:1px solid var(--border-light)">
+    <div><label style="font-size:.65rem;font-weight:600;color:var(--t3);text-transform:uppercase;display:block;margin-bottom:.25rem">PPN (%)</label><input style="width:100%;padding:.45rem .6rem;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--t1);background:var(--white);outline:none;text-align:center" type="number" id="ci_ppn" value="11" step="0.5" oninput="rc()"/></div>
+    <div><label style="font-size:.65rem;font-weight:600;color:var(--t3);text-transform:uppercase;display:block;margin-bottom:.25rem">PPH (%)</label><input style="width:100%;padding:.45rem .6rem;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--t4);background:var(--border-light);outline:none;text-align:center;cursor:default" type="number" id="ci_pph" value="3" readonly/></div>
+    <div><label style="font-size:.65rem;font-weight:600;color:var(--t3);text-transform:uppercase;display:block;margin-bottom:.25rem">Margin Untung (%)</label><input style="width:100%;padding:.45rem .6rem;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--t1);background:var(--white);outline:none;text-align:center" type="number" id="ci_margin" value="10" step="1" oninput="rc()"/></div>
+    <div><label style="font-size:.65rem;font-weight:600;color:var(--t3);text-transform:uppercase;display:block;margin-bottom:.25rem">Uang Muka (%)</label><input style="width:100%;padding:.45rem .6rem;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--t1);background:var(--white);outline:none;text-align:center" type="number" id="ci_um" value="15" step="1" oninput="rc()"/></div>
+    <div><label style="font-size:.65rem;font-weight:600;color:var(--t3);text-transform:uppercase;display:block;margin-bottom:.25rem">Self Financing</label><div style="padding:.45rem .6rem;border:1.5px solid var(--border);border-radius:8px;font-size:.85rem;font-weight:600;color:var(--t4);background:var(--border-light);text-align:center" id="sfLabel">20%</div></div>
+  </div>
+
+  <div class="calc-flow" id="cflow"></div>
+
+  <div class="calc-big-result" id="cbr"></div>
+
+  <!-- Benefit / Recommendation Section -->
+  <div id="benefitSection" style="margin-top:1.5rem"></div>
+</div>
+</div>
+
+<!-- ===== PAGE 3: PERSYARATAN PENCAIRAN ===== -->
+<div class="pg" id="p3">
+<div class="ph"><h2>Persyaratan Pencairan</h2><p>Klik pada setiap poin untuk membaca penjelasan lengkap</p></div>
+<div class="req-cols">
+  <div>
+    <h3 style="color:var(--primary)"><div class="ci" style="background:var(--pl);color:var(--primary)">🔑</div> Pra-Syarat</h3>
+    <div class="exp" id="e0"><div class="exp-h" onclick="tglExp(0)"><div class="exp-n" style="background:var(--pl);color:var(--primary)">1</div>Surat Permohonan Pencairan<span class="exp-arrow">▼</span></div><div class="exp-b">Disampaikan nasabah maksimal <strong>3 hari kerja</strong> sebelum rencana tanggal pencairan.</div></div>
+    <div class="exp" id="e1"><div class="exp-h" onclick="tglExp(1)"><div class="exp-n" style="background:var(--pl);color:var(--primary)">2</div>Underlying Document Lengkap<span class="exp-arrow">▼</span></div><div class="exp-b">Seluruh dokumen kontrak (SPK, SPP/SPPP, PO, WO, dll) harus sudah ditandatangani dan diverifikasi.</div></div>
+    <div class="exp" id="e2"><div class="exp-h" onclick="tglExp(2)"><div class="exp-n" style="background:var(--pl);color:var(--primary)">3</div>Rekening Escrow / Giro Aktif<span class="exp-arrow">▼</span></div><div class="exp-b">Wajib memiliki rekening escrow/giro pasif + giro aktif di Bank DKI. Semua pembayaran tagihan harus masuk via escrow dan tidak boleh ditarik tunai selama fasilitas belum lunas.</div></div>
+    <div class="exp" id="e3"><div class="exp-h" onclick="tglExp(3)"><div class="exp-n" style="background:var(--pl);color:var(--primary)">4</div>Konfirmasi Proyek ke Bouwheer<span class="exp-arrow">▼</span></div><div class="exp-b">Bank melakukan kunjungan langsung, telepon/video conference, atau pencatatan Memo Laporan (foto/screenshot/email) untuk verifikasi keabsahan kontrak proyek.</div></div>
+    <div class="exp" id="e4"><div class="exp-h" onclick="tglExp(4)"><div class="exp-n" style="background:var(--pl);color:var(--primary)">5</div>Self Financing Terpenuhi<span class="exp-arrow">▼</span></div><div class="exp-b"><em>Self financing</em> harus dipenuhi <strong>sebelum penarikan</strong>. Bukti: material on site, piutang/termin, progres proyek, dana di rekening. Seluruhnya diverifikasi dan dikuasai Bank.</div></div>
+    <div class="exp" id="e5"><div class="exp-h" onclick="tglExp(5)"><div class="exp-n" style="background:var(--pl);color:var(--primary)">6</div>Outstanding Ter-cover 125%<span class="exp-arrow">▼</span></div><div class="exp-b">Outstanding pembiayaan harus ter-<em>cover</em> minimal <strong>125%</strong> dari sisa tagihan + potensi tagihan proyek.</div></div>
+  </div>
+  <div>
+    <h3 style="color:var(--warning)"><div class="ci" style="background:var(--wl);color:var(--warning)">📋</div> Saat & Setelah Pencairan</h3>
+    <div class="exp" id="e6"><div class="exp-h" onclick="tglExp(6)"><div class="exp-n" style="background:var(--wl);color:var(--warning)">7</div>Verifikasi Progres ke Bouwheer<span class="exp-arrow">▼</span></div><div class="exp-b">Dituangkan dalam Memo Laporan: prestasi pekerjaan dari konsultan pengawas, perkiraan tanggal pembayaran, dan Berita Acara Serah Terima.</div></div>
+    <div class="exp" id="e7"><div class="exp-h" onclick="tglExp(7)"><div class="exp-n" style="background:var(--wl);color:var(--warning)">8</div>Proyek Pendek (Maks 90 Hari)<span class="exp-arrow">▼</span></div><div class="exp-b">Proyek cepat (jalan, pengaspalan, dsb) dapat dilakukan penarikan sekaligus (<em>turnkey</em>) sebesar <strong>70%</strong> dari Nilai Proyek Bersih, dengan pertimbangan kredibilitas <em>bouwheer</em>.</div></div>
+    <div class="exp" id="e8"><div class="exp-h" onclick="tglExp(8)"><div class="exp-n" style="background:var(--wl);color:var(--warning)">9</div>Laporan Progres Berkala<span class="exp-arrow">▼</span></div><div class="exp-b">Nasabah wajib menyerahkan Laporan Progres Proyek secara berkala, di-<em>countersign</em> oleh Konsultan Pengawas/<em>bouwheer</em>.</div></div>
+    <div class="exp" id="e9"><div class="exp-h" onclick="tglExp(9)"><div class="exp-n" style="background:var(--wl);color:var(--warning)">10</div>Cost Overrun & Pelunasan<span class="exp-arrow">▼</span></div><div class="exp-b"><em>Cost overrun</em> sepenuhnya beban nasabah. Saat proyek selesai, pembiayaan <strong>harus nihil</strong>. Penarikan harus memperhatikan sisa jatuh tempo fasilitas.</div></div>
+    <div class="exp" id="e10"><div class="exp-h" onclick="tglExp(10)"><div class="exp-n" style="background:var(--wl);color:var(--warning)">11</div>Grup Usaha<span class="exp-arrow">▼</span></div><div class="exp-b">Untuk anggota grup usaha, rekening <em>escrow</em>/giro pasif yang digunakan adalah milik an. perusahaan pemenang proyek.</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ===== PAGE 4: FAQ ===== -->
+<div class="pg" id="p4">
+<div class="ph"><h2>FAQ (Pertanyaan Umum)</h2><p>Jawaban atas pertanyaan yang paling sering diajukan calon nasabah</p></div>
+
+<div class="faq-item" id="f0"><div class="faq-q" onclick="tglFaq(0)"><div class="icon">Q</div>Bagaimana skema cicilan pembayarannya? Apakah dicicil bulanan?<span class="faq-arrow">▼</span></div><div class="faq-a">
+  <p><strong>Pembiayaan Kontraktor Jakarta bukan kredit konsumer biasa yang dicicil bulanan tetap.</strong> Pengembalian pokok disesuaikan dengan alur penerimaan pembayaran proyek dari <em>bouwheer</em>:</p>
+  <p><strong>Skema Termin:</strong> Setiap kali <em>bouwheer</em> membayar progres pekerjaan (misal: termin 1 = 30%, termin 2 = 30%, termin 3 = 40%), pembayaran tersebut masuk ke rekening escrow dan langsung dipotong untuk membayar pokok pembiayaan. Jadi pembayaran pokok mengikuti irama pembayaran proyek, bukan cicilan bulanan tetap.</p>
+  <p><strong>Skema Turnkey:</strong> Pembayaran proyek diterima sekaligus di akhir setelah proyek selesai 100%. Saat pembayaran dari <em>bouwheer</em> masuk ke rekening escrow, langsung dipotong untuk melunasi seluruh pokok pembiayaan sekaligus.</p>
+  <p><strong>Yang dibayar bulanan hanyalah margin/nisbah</strong> (bunga), bukan pokok pinjaman.</p>
+  <div id="faqChart1" style="margin-top:.75rem"></div>
+</div></div>
+
+<div class="faq-item" id="f1"><div class="faq-q" onclick="tglFaq(1)"><div class="icon">Q</div>Berapa lama proses pengajuan hingga pencairan?<span class="faq-arrow">▼</span></div><div class="faq-a">
+  <p>Secara umum, proses dari pengajuan hingga pencairan membutuhkan waktu sekitar <strong>14-30 hari kerja</strong>, tergantung kelengkapan dokumen dan kompleksitas proyek. Tahapannya meliputi: pengumpulan dokumen (3-5 hari), analisa pembiayaan oleh Bank (7-14 hari), keputusan komite (3-5 hari), penandatanganan akad dan pencairan (1-3 hari).</p>
+  <p>Tips: <strong>Siapkan seluruh dokumen di checklist "Data yang Dibutuhkan"</strong> sebelum mengajukan agar prosesnya tidak tertunda.</p>
+</div></div>
+
+<div class="faq-item" id="f2"><div class="faq-q" onclick="tglFaq(2)"><div class="icon">Q</div>Apa bedanya PKJ Plafon dan PKJ Transaksional?<span class="faq-arrow">▼</span></div><div class="faq-a">
+  <p><strong>PKJ Plafon (Revolving):</strong> Seperti "kartu kredit" untuk proyek. Anda mendapat batas limit dan bisa menarik dana berulang kali selama limit belum habis dan fasilitas belum jatuh tempo (maks 12 bulan, bisa diperpanjang). Cocok untuk kontraktor yang punya <strong>banyak proyek bersamaan</strong>.</p>
+  <p><strong>PKJ Transaksional (Non-Revolving):</strong> Seperti "pinjaman sekali pakai" untuk satu proyek spesifik. Begitu dana ditarik dan dilunasi, fasilitas selesai. Cocok untuk kontraktor yang ingin membiayai <strong>satu proyek tertentu</strong>.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem">
+    <div style="background:var(--pl);border-radius:var(--rs);padding:1rem;text-align:center"><div style="font-size:2rem;margin-bottom:.4rem">🔄</div><div style="font-weight:700;font-size:.85rem;color:var(--pd)">Plafon (Revolving)</div><div style="font-size:.75rem;color:var(--t3);margin-top:.3rem">Multi-proyek, bisa ditarik berulang, maks 12 bulan</div></div>
+    <div style="background:var(--sl);border-radius:var(--rs);padding:1rem;text-align:center"><div style="font-size:2rem;margin-bottom:.4rem">📌</div><div style="font-weight:700;font-size:.85rem;color:#059669">Transaksional</div><div style="font-size:.75rem;color:var(--t3);margin-top:.3rem">Satu proyek spesifik, sekali pakai, sesuai jangka proyek</div></div>
+  </div>
+</div></div>
+
+<div class="faq-item" id="f3"><div class="faq-q" onclick="tglFaq(3)"><div class="icon">Q</div>Apa itu self financing dan berapa yang harus saya siapkan?<span class="faq-arrow">▼</span></div><div class="faq-a">
+  <p><strong><em>Self financing</em></strong> adalah porsi pembiayaan yang harus ditanggung sendiri oleh nasabah (bukan dari Bank). Ini membuktikan komitmen Anda dalam proyek tersebut.</p>
+  <p>Besarannya tergantung skema: <strong>Termin = minimal 20%</strong> dari COP Netto, <strong>Turnkey = minimal 30%</strong> dari COP Netto. Selisih antara total kebutuhan proyek dan pembiayaan Bank merupakan <em>self financing</em> Anda.</p>
+  <p>Bukti <em>self financing</em> dapat berupa: material di lokasi proyek (<em>material on site</em>), piutang/pembayaran termin, progres pekerjaan yang sudah dikerjakan, atau dana di rekening nasabah. Semua bukti harus diverifikasi oleh Bank.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.75rem">
+    <div style="background:var(--pl);border-radius:var(--rs);padding:1rem;text-align:center"><div style="font-size:1.8rem;font-weight:800;color:var(--pd)">20%</div><div style="font-size:.75rem;color:var(--t3);margin-top:.2rem">Min. Self Financing <strong>Termin</strong></div></div>
+    <div style="background:var(--sl);border-radius:var(--rs);padding:1rem;text-align:center"><div style="font-size:1.8rem;font-weight:800;color:var(--success)">30%</div><div style="font-size:.75rem;color:var(--t3);margin-top:.2rem">Min. Self Financing <strong>Turnkey</strong></div></div>
+  </div>
+</div></div>
+
+<div class="faq-item" id="f4"><div class="faq-q" onclick="tglFaq(4)"><div class="icon">Q</div>Apa itu rekening escrow dan mengapa wajib?<span class="faq-arrow">▼</span></div><div class="faq-a">
+  <p><strong>Rekening escrow</strong> adalah rekening khusus yang diawasi oleh Bank, berfungsi sebagai "penampung" seluruh pembayaran tagihan proyek dari <em>bouwheer</em>. Nasabah <strong>tidak bisa menarik tunai</strong> dari rekening ini secara bebas.</p>
+  <p>Tujuannya: memastikan setiap pembayaran dari <em>bouwheer</em> langsung digunakan untuk membayar kewajiban pembiayaan terlebih dahulu, sebelum sisanya bisa digunakan oleh nasabah. Ini adalah mekanisme perlindungan bagi Bank sekaligus menjaga kedisiplinan arus kas proyek.</p>
+</div></div>
+
+<div class="faq-item" id="f5"><div class="faq-q" onclick="tglFaq(5)"><div class="icon">Q</div>Bagaimana jika proyek saya mengalami cost overrun?<span class="faq-arrow">▼</span></div><div class="faq-a">
+  <p><strong><em>Cost overrun</em> sepenuhnya menjadi beban dan tanggung jawab nasabah.</strong> Bank tidak akan menambah fasilitas pembiayaan untuk menutupi pembengkakan biaya proyek.</p>
+  <p>Oleh karena itu, sangat penting untuk membuat estimasi biaya proyek yang akurat dan menyediakan buffer dalam perhitungan margin keuntungan Anda sebelum mengajukan pembiayaan.</p>
+</div></div>
+
+<div class="faq-item" id="f6"><div class="faq-q" onclick="tglFaq(6)"><div class="icon">Q</div>Agunan apa saja yang bisa digunakan?<span class="faq-arrow">▼</span></div><div class="faq-a">
+  <p><strong>Agunan Utama:</strong> Tagihan dan potensi tagihan atas proyek yang dibiayai (diikat secara Fidusia Notariil, min. 125% dari outstanding).</p>
+  <p><strong>Agunan Tambahan (opsional, mempengaruhi besaran margin):</strong></p>
+  <p>Benda Bergerak: Cash collateral (deposito/tabungan/giro yang diblokir), diikat secara Gadai.</p>
+  <p>Benda Tidak Bergerak: Tanah & bangunan (SHM/SHGB/SHGU/SHP), diikat dengan Hak Tanggungan.</p>
+  <p>Semakin besar coverage agunan tambahan, semakin rendah margin yang dikenakan (mulai dari BLR+1% untuk coverage ≥100%).</p>
+</div></div>
+
+<div class="faq-item" id="f7"><div class="faq-q" onclick="tglFaq(7)"><div class="icon">Q</div>Apakah PKJ Plafon dan PKJ Transaksional sama-sama bisa Termin dan Turnkey?<span class="faq-arrow">▼</span></div><div class="faq-a">
+  <p><strong>Ya, keduanya bisa menggunakan skema Termin maupun Turnkey.</strong> Ini karena Plafon/Transaksional dan Termin/Turnkey adalah dua hal yang berbeda:</p>
+  <p><strong>PKJ Plafon vs Transaksional</strong> menentukan <em>jenis fasilitas</em> pembiayaan Anda (revolving vs sekali pakai). Sedangkan <strong>Termin vs Turnkey</strong> menentukan <em>cara pencairan dana</em> untuk setiap proyek yang dibiayai.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0">
+    <div style="border-radius:var(--rs);overflow:hidden;border:1px solid rgba(124,58,237,0.15)">
+      <div style="background:var(--primary);color:#fff;padding:.6rem;text-align:center;font-size:.8rem;font-weight:700">🔄 PKJ Plafon</div>
+      <div style="padding:.75rem;font-size:.78rem;color:var(--t2);line-height:1.5;background:var(--pl)">
+        <p style="margin-bottom:.4rem">• Proyek A → Termin (80%)</p>
+        <p style="margin-bottom:.4rem">• Proyek B → Turnkey (70%)</p>
+        <p>• Proyek C → Termin (80%)</p>
+        <p style="margin-top:.5rem;font-size:.72rem;color:var(--t3)">Semua dalam satu limit revolving</p>
+      </div>
+    </div>
+    <div style="border-radius:var(--rs);overflow:hidden;border:1px solid rgba(16,185,129,0.15)">
+      <div style="background:var(--success);color:#fff;padding:.6rem;text-align:center;font-size:.8rem;font-weight:700">📌 PKJ Transaksional</div>
+      <div style="padding:.75rem;font-size:.78rem;color:var(--t2);line-height:1.5;background:var(--sl)">
+        <p style="margin-bottom:.4rem">• 1 Proyek → Termin (80%)</p>
+        <p style="font-weight:700">ATAU</p>
+        <p>• 1 Proyek → Turnkey (70%)</p>
+        <p style="margin-top:.5rem;font-size:.72rem;color:var(--t3)">Satu fasilitas untuk satu proyek</p>
+      </div>
+    </div>
+  </div>
+  <p>Jadi <strong>Termin/Turnkey bukan jenis produk</strong>, melainkan <strong>mekanisme pencairan</strong> yang dipilih berdasarkan sifat proyek dan cara pembayaran dari <em>bouwheer</em>.</p>
+</div></div>
+</div>
+
+<!-- ===== PAGE 5: AGUNAN ===== -->
+<div class="pg" id="p5">
+<div class="ph"><h2>Agunan (Jaminan)</h2><p>Jenis agunan dan skema pengikatan</p></div>
+<div class="cd">
+  <div class="ct-t"><div class="ci" style="background:var(--pl);color:var(--primary)">🏗️</div>Jenis Agunan & Pengikatan</div>
+  <div class="tbl-wrap"><table><thead><tr><th style="width:130px">Kategori</th><th>Jenis Agunan</th><th style="width:260px">Pengikatan</th></tr></thead><tbody>
+    <tr style="background:var(--ps)"><td style="font-weight:600"><span class="badge bp">Agunan Utama</span></td><td>Tagihan & potensi tagihan proyek sesuai kontrak</td><td><strong>Fidusia Notariil</strong> + pendaftaran, min. 125% dari outstanding</td></tr>
+    <tr><td style="font-weight:600" rowspan="2"><span class="badge bg">Agunan Tambahan</span></td><td><strong>Benda Bergerak:</strong> Cash Collateral</td><td><strong>Gadai</strong></td></tr>
+    <tr><td><strong>Benda Tidak Bergerak:</strong> Tanah & Bangunan (SHM/SHGB/SHGU/SHP)</td><td><strong>Hak Tanggungan</strong></td></tr>
+  </tbody></table></div>
+  <div class="ib ib-w"><h4 style="color:var(--warning)">⚡ Margin Berdasarkan Agunan Tambahan</h4><p>≥100%: BLR+1% | ≥70%-&lt;100%: BLR+2,5% | &gt;30%-70%: BLR+3,5% | &gt;10%-30%: BLR+5,5%</p></div>
+</div>
+<div class="cd">
+  <div class="ct-t"><div class="ci" style="background:var(--il);color:var(--info)">📖</div>Penjelasan Pengikatan</div>
+  <div class="ib ib-b" style="margin-top:0;margin-bottom:.75rem"><h4>🔏 Fidusia Notariil</h4><p>Pengalihan hak kepemilikan tagihan proyek ke Bank sebagai jaminan, namun benda tetap dikuasai nasabah. Akta dibuat Notaris dan didaftarkan ke Kemenkumham sehingga memiliki kekuatan eksekutorial.</p></div>
+  <div class="ib ib-b" style="margin-bottom:.75rem"><h4>🔐 Gadai</h4><p>Penyerahan benda bergerak (deposito/tabungan/giro) ke Bank secara fisik. Jika wanprestasi, Bank berhak mencairkan langsung untuk pelunasan.</p></div>
+  <div class="ib ib-b"><h4>🏠 Hak Tanggungan</h4><p>Jaminan atas hak tanah (UU No. 4/1996). Dibuat APHT oleh PPAT, didaftarkan ke BPN. Bank memiliki hak preferen (didahulukan) atas penjualan tanah/bangunan jika gagal bayar.</p></div>
+</div>
+</div>
+
+</div>
+
+<script>
+const menus=['Fitur Produk','Data Dibutuhkan','Kalkulator','Persyaratan Pencairan','FAQ','Agunan'];
+document.getElementById('tabs').innerHTML=menus.map((m,i)=>`<div class="tab${i===0?' on':''}" onclick="sw(${i})">${m}</div>`).join('');
+function sw(i){document.querySelectorAll('.pg').forEach((p,j)=>{p.classList.toggle('on',j===i)});document.querySelectorAll('.tab').forEach((t,j)=>{t.classList.toggle('on',j===i)});window.scrollTo({top:0,behavior:'smooth'})}
+
+// MARGIN SIMULATION - SVG BAR CHART
+const fRp=n=>'Rp '+Math.round(n).toLocaleString('id-ID');
+const fJt=n=>{const m=n/1000000;return m>=1000?(m/1000).toFixed(1)+'M':m.toFixed(0)+' Jt'};
+
+function updateSim(){
+  const b=parseFloat(document.getElementById('blrInput').value)||0;
+  const P=1000000000;
+  const tiers=[
+    {l:'Agunan ≥100%',s:1,c:'#10b981',tag:'Terbaik'},
+    {l:'Agunan ≥70%',s:2.5,c:'#7c3aed',tag:''},
+    {l:'Agunan >30%',s:3.5,c:'#f59e0b',tag:''},
+    {l:'Agunan >10%',s:5.5,c:'#ef4444',tag:'Termahal'}
+  ];
+  const data=tiers.map(t=>({...t,rate:b+t.s,margin:P*((b+t.s)/100),total:P+P*((b+t.s)/100)}));
+  const maxMargin=Math.max(...data.map(d=>d.margin));
+  const minMargin=Math.min(...data.map(d=>d.margin));
+
+  // Chart focuses on MARGIN ONLY so differences are clearly visible
+  const W=600,H=300,pad={t:40,r:20,b:75,l:70};
+  const cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+  const gap=cW/data.length;
+  const barW=gap*0.5;
+
+  let svg=`<svg class="svg-chart" viewBox="0 0 ${W} ${H}" style="max-width:${W}px;width:100%;height:auto">`;
+  // Title
+  svg+=`<text x="${W/2}" y="18" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600">Biaya Margin per Tahun (Plafon Rp 1 Miliar)</text>`;
+  // Y-axis grid lines (based on margin range with padding)
+  const yMax=Math.ceil(maxMargin/10000000)*10000000;
+  const steps=5;
+  for(let i=0;i<=steps;i++){
+    const val=(yMax/steps)*i;
+    const yy=pad.t+cH-(cH/steps)*i;
+    svg+=`<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" stroke="${i===0?'#d1d5db':'#f3f4f6'}" stroke-width="1"/>`;
+    svg+=`<text x="${pad.l-8}" y="${yy+4}" text-anchor="end" fill="#9ca3af" font-size="10" font-weight="500">${fJt(val)}</text>`;
+  }
+  // Bars - margin only
+  data.forEach((d,i)=>{
+    const cx=pad.l+gap*i+gap/2;
+    const barH=Math.max((d.margin/yMax)*cH,4);
+    const bY=pad.t+cH-barH;
+    // Bar with rounded top
+    svg+=`<rect x="${cx-barW/2}" y="${bY}" width="${barW}" height="${barH}" rx="6" ry="6" fill="${d.c}" opacity=".85"/>`;
+    // Glow effect
+    svg+=`<rect x="${cx-barW/2+2}" y="${bY+2}" width="${barW-4}" height="${Math.max(barH-4,0)}" rx="5" ry="5" fill="${d.c}" opacity=".15"/>`;
+    // Value on top of bar
+    svg+=`<text x="${cx}" y="${bY-10}" text-anchor="middle" fill="${d.c}" font-size="13" font-weight="800">${fRp(d.margin)}</text>`;
+    // Savings compared to worst tier
+    if(i<data.length-1){
+      const saved=data[data.length-1].margin-d.margin;
+      svg+=`<text x="${cx}" y="${bY-25}" text-anchor="middle" fill="#10b981" font-size="9" font-weight="600">hemat ${fJt(saved)}</text>`;
+    }
+    // X labels
+    svg+=`<text x="${cx}" y="${H-pad.b+18}" text-anchor="middle" fill="#374151" font-size="10" font-weight="600">${d.l}</text>`;
+    svg+=`<text x="${cx}" y="${H-pad.b+34}" text-anchor="middle" fill="${d.c}" font-size="13" font-weight="800">${d.rate.toFixed(2)}%</text>`;
+    // Tag
+    if(d.tag){
+      const tagBg=d.tag==='Terbaik'?'#ecfdf5':'#fef2f2';
+      const tagC=d.tag==='Terbaik'?'#059669':'#ef4444';
+      svg+=`<rect x="${cx-24}" y="${H-pad.b+40}" width="48" height="16" rx="4" fill="${tagBg}"/>`;
+      svg+=`<text x="${cx}" y="${H-pad.b+52}" text-anchor="middle" fill="${tagC}" font-size="8" font-weight="700">${d.tag}</text>`;
+    }
+  });
+  svg+='</svg>';
+  document.getElementById('svgChartWrap').innerHTML=svg;
+
+  // Summary cards below chart
+  const lowest=data[0],highest=data[data.length-1];
+  const diff=highest.margin-lowest.margin;
+  document.getElementById('simInsight').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem">
+      ${data.map(d=>`<div style="background:${d.c}08;border:1px solid ${d.c}22;border-radius:var(--rs);padding:.85rem;text-align:center">
+        <div style="font-size:.65rem;color:var(--t3);font-weight:600;margin-bottom:.2rem">TOTAL KEMBALI</div>
+        <div style="font-size:1rem;font-weight:800;color:${d.c}">${fRp(d.total)}</div>
+        <div style="font-size:.68rem;color:var(--t4);margin-top:.15rem">Pokok 1M + Margin ${fJt(d.margin)}</div>
+      </div>`).join('')}
+    </div>
+    <div style="background:var(--bg);border-radius:var(--rs);padding:1rem;font-size:.82rem;color:var(--t2);line-height:1.6;border:1px solid var(--border-light)"><strong style="color:var(--t1)">💡 Insight:</strong> Dengan agunan tambahan ≥100%, Anda <strong style="color:#10b981">menghemat ${fRp(diff)}/tahun</strong> dibanding agunan >10%. Selisih ini setara <strong>${fRp(Math.round(diff/12))}/bulan</strong> lebih murah.</div>`;
+}
+updateSim();
+
+// CALCULATOR
+let mode='termin';
+function setMode(m){mode=m;document.getElementById('tgT').classList.toggle('on',m==='termin');document.getElementById('tgK').classList.toggle('on',m==='turnkey');document.getElementById('sfLabel').textContent=m==='termin'?'20%':'30%';rc()}
+
+function rc(){
+  const aRibu=parseFloat(document.getElementById('ck').value)||0;
+  const a=aRibu*1000;
+  const pp=parseFloat(document.getElementById('ci_ppn').value)||0;
+  const ph=parseFloat(document.getElementById('ci_pph').value)||3;
+  const mg=parseFloat(document.getElementById('ci_margin').value)||0;
+  const um=parseFloat(document.getElementById('ci_um').value)||0;
+  const sfPct=mode==='termin'?20:30;
+  const bfPct=mode==='termin'?80:70;
+  const b=(pp/100*a)/(1+pp/100);
+  const c=a-b;const d=c*(ph/100);const e=c-d;const f=c*(mg/100);const g=e-f;const h=e*(um/100);const iv=g-h;const j=e-h;
+  const sf=iv*(sfPct/100);const bf=iv*(bfPct/100);
+
+  const items=[
+    {l:'Nilai Kontrak',v:a,code:'a',h:0},
+    {l:'PPN ('+pp+'%)',v:b,code:'b',h:0},
+    {l:'Nilai Proyek − PPN',v:c,code:'a−b',h:1},
+    {l:'PPH ('+ph+'%)',v:d,code:'c×'+ph+'%',h:0},
+    {l:'Tagihan Brutto',v:e,code:'c−d',h:1},
+    {l:'Keuntungan ('+mg+'%)',v:f,code:'c×'+mg+'%',h:0},
+    {l:'COP Brutto',v:g,code:'e−f',h:0},
+    {l:'Uang Muka ('+um+'%)',v:h,code:'e×'+um+'%',h:0},
+    {l:'COP Netto',v:iv,code:'g−h',h:2},
+    {l:'Tagihan Bersih',v:j,code:'e−h',h:0},
+  ];
+
+  document.getElementById('cflow').innerHTML=items.map(r=>{
+    const cls=r.h===1?'flow-item hl':r.h===2?'flow-item hlg':'flow-item';
+    return`<div class="${cls}"><div class="flow-label">${r.l} <span style="opacity:.6">${r.code}</span></div><div class="flow-val">${fRp(r.v)}</div></div>`;
+  }).join('');
+
+  const tAct=mode==='termin';
+  document.getElementById('cbr').innerHTML=`
+    <div class="big-res ${tAct?'active':'inactive'}"><h4 style="color:${tAct?'var(--pd)':'var(--t4)'}">Pembiayaan Bank (Termin 80%)</h4><div class="bv" style="color:${tAct?'var(--primary)':'var(--t4)'}">${fRp(iv*0.8)}</div><div class="bd">Self Financing min 20% = ${fRp(iv*0.2)}</div></div>
+    <div class="big-res ${!tAct?'active':'inactive'}"><h4 style="color:${!tAct?'#059669':'var(--t4)'}">Pembiayaan Bank (Turnkey 70%)</h4><div class="bv" style="color:${!tAct?'var(--success)':'var(--t4)'}">${fRp(iv*0.7)}</div><div class="bd">Self Financing min 30% = ${fRp(iv*0.3)}</div></div>`;
+
+  // Benefit section
+  const bs=document.getElementById('benefitSection');
+  if(tAct){
+    bs.innerHTML=`
+    <div style="border:1.5px solid rgba(124,58,237,0.2);border-radius:var(--r);overflow:hidden">
+      <div style="background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;padding:.85rem 1.25rem;font-weight:700;font-size:.9rem">📋 Mengapa Memilih Termin?</div>
+      <div style="padding:1.25rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+          <div>
+            <div style="font-size:.72rem;font-weight:700;color:var(--primary);text-transform:uppercase;margin-bottom:.5rem">✅ Keuntungan Termin</div>
+            <div style="font-size:.82rem;color:var(--t2);line-height:1.65">
+              <p style="margin-bottom:.4rem">• <strong>Pembiayaan lebih besar</strong> (80% vs 70%)</p>
+              <p style="margin-bottom:.4rem">• <strong>Self financing lebih ringan</strong> (20% vs 30%)</p>
+              <p style="margin-bottom:.4rem">• Risiko lebih terkontrol karena dana cair <strong>bertahap</strong></p>
+              <p>• Margin/bunga lebih efisien karena baki debet turun bertahap</p>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:.72rem;font-weight:700;color:var(--success);text-transform:uppercase;margin-bottom:.5rem">👤 Cocok Untuk Nasabah</div>
+            <div style="font-size:.82rem;color:var(--t2);line-height:1.65">
+              <p style="margin-bottom:.4rem">• Proyek jangka <strong>menengah-panjang</strong> (&gt;3 bulan)</p>
+              <p style="margin-bottom:.4rem">• <em>Bouwheer</em> membayar progres <strong>secara bertahap</strong></p>
+              <p style="margin-bottom:.4rem">• Kontraktor yang ingin <strong>meminimalkan modal sendiri</strong></p>
+              <p>• Proyek konstruksi/infrastruktur dengan milestone jelas</p>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--pl);border-radius:var(--rs);padding:.85rem;font-size:.78rem;color:var(--t2);line-height:1.5">💡 <strong>Contoh:</strong> Proyek pembangunan gedung 9 bulan \u2014 <em>bouwheer</em> bayar per termin (30%-30%-40%). Anda tarik dana sesuai kebutuhan tiap tahap, dan pokok langsung dipotong dari setiap pembayaran termin.</div>
+      </div>
+    </div>`;
+  } else {
+    bs.innerHTML=`
+    <div style="border:1.5px solid rgba(16,185,129,0.2);border-radius:var(--r);overflow:hidden">
+      <div style="background:linear-gradient(135deg,#10b981,#059669);color:#fff;padding:.85rem 1.25rem;font-weight:700;font-size:.9rem">📋 Mengapa Memilih Turnkey?</div>
+      <div style="padding:1.25rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+          <div>
+            <div style="font-size:.72rem;font-weight:700;color:var(--success);text-transform:uppercase;margin-bottom:.5rem">✅ Keuntungan Turnkey</div>
+            <div style="font-size:.82rem;color:var(--t2);line-height:1.65">
+              <p style="margin-bottom:.4rem">• <strong>Dana cair sekaligus</strong> di awal \u2014 langsung bisa eksekusi penuh</p>
+              <p style="margin-bottom:.4rem">• Tidak perlu menunggu progres termin untuk penarikan berikutnya</p>
+              <p style="margin-bottom:.4rem">• Proses administrasi <strong>lebih sederhana</strong> (1x penarikan)</p>
+              <p>• Cocok untuk proyek yang butuh <strong>belanja material besar di awal</strong></p>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:.72rem;font-weight:700;color:var(--primary);text-transform:uppercase;margin-bottom:.5rem">👤 Cocok Untuk Nasabah</div>
+            <div style="font-size:.82rem;color:var(--t2);line-height:1.65">
+              <p style="margin-bottom:.4rem">• Proyek jangka <strong>pendek</strong> (maks 90 hari seperti jalan/pengaspalan)</p>
+              <p style="margin-bottom:.4rem">• <em>Bouwheer</em> membayar <strong>sekaligus di akhir</strong> setelah selesai 100%</p>
+              <p style="margin-bottom:.4rem">• Kontraktor dengan <strong>modal sendiri lebih kuat</strong> (min 30%)</p>
+              <p>• <em>Bouwheer</em> memiliki <strong>kredibilitas dan riwayat pembayaran baik</strong></p>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--sl);border-radius:var(--rs);padding:.85rem;font-size:.78rem;color:var(--t2);line-height:1.5">💡 <strong>Contoh:</strong> Proyek pengaspalan jalan 2 bulan \u2014 Anda butuh seluruh material dan alat berat dari awal. Dana cair 70% sekaligus, dan pokok dilunasi saat <em>bouwheer</em> bayar penuh di akhir proyek.</div>
+      </div>
+    </div>`;
+  }
+}
+rc();
+
+// EXPANDABLE
+function tglExp(i){document.getElementById('e'+i).classList.toggle('open')}
+function tglFaq(i){document.getElementById('f'+i).classList.toggle('open');
+  // Render FAQ chart 1 on first open
+  if(i===0&&!document.getElementById('faqChart1').innerHTML){
+    const d=[{l:'Bulan 1-3',t:'Termin 1 (30%)',p:30},{l:'Bulan 4-6',t:'Termin 2 (30%)',p:30},{l:'Bulan 7-9',t:'Termin 3 (40%)',p:40}];
+    const mx=40;
+    document.getElementById('faqChart1').innerHTML=`<div style="font-size:.78rem;font-weight:600;color:var(--t3);margin-bottom:.5rem">Contoh Alur Pembayaran Pokok (Skema Termin)</div><div style="display:flex;gap:.75rem;align-items:flex-end;height:120px;padding-bottom:.5rem">${d.map(x=>`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem"><div style="font-size:.7rem;font-weight:700;color:var(--primary)">${x.p}%</div><div style="width:100%;height:${(x.p/mx)*80}px;background:var(--primary);border-radius:6px 6px 0 0;opacity:.75"></div><div style="font-size:.65rem;color:var(--t3);text-align:center;line-height:1.2">${x.l}<br/><strong>${x.t}</strong></div></div>`).join('')}</div><div style="font-size:.75rem;color:var(--t3);margin-top:.5rem;padding:.6rem;background:var(--sl);border-radius:8px">Pada skema <strong>Turnkey</strong>, seluruh pembayaran pokok (100%) dilunasi sekaligus di akhir proyek saat <em>bouwheer</em> membayar.</div>`;
+  }
+}
+</script>
+</body>
+</html>
